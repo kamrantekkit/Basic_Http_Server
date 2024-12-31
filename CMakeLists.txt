@@ -9,7 +9,12 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 message(STATUS "wiringPi_LIB: ${wiringPi_LIB}")
 
-add_executable(Basic_Http_Server src/main.cpp src/UDPServer.cpp)
+add_executable(Basic_Http_Server
+        src/main.cpp
+        src/UDPServer.cpp
+        src/NetworkHelper.cpp
+#        include/TCPServer.h
+)
 
 target_link_libraries(Basic_Http_Server ${wiringPi_LIB})
 

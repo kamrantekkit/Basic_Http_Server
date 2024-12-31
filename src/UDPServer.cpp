@@ -7,12 +7,14 @@
 #include <cstring>
 #include <iostream>
 #include <netdb.h>
+#include <NetworkHelper.h>
 #include <string>
 #include <UDPServer.h>
 #include <wiringPi.h>
 #include <arpa/inet.h>
-#include <bits/socket.h>
+#include <sys/socket.h>
 #include <sys/wait.h>
+
 
 int MAXBUFLEN = 100;
 
@@ -44,13 +46,6 @@ int handleMessage(const std::string &input) {
     return 1;
 }
 
-
-void *get_in_addr(struct sockaddr *sa) {
-    if (sa->sa_family == AF_INET) {
-        return &(((struct sockaddr_in *) sa)->sin_addr);
-    }
-    return &(((struct sockaddr_in6 *) sa)->sin6_addr);
-}
 
 
 int UDPServer::startServer(const char *port) {
@@ -108,6 +103,7 @@ int UDPServer::startServer(const char *port) {
             perror("recvfrom");
             exit(1);
         }
+
 
         printf("listener: got packet from %s\n",
                inet_ntop(their_addr.ss_family,
