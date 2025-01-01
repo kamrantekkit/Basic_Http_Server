@@ -1,3 +1,4 @@
+#include <TCPServer.h>
 #include <UDPServer.h>
 
 
@@ -7,8 +8,8 @@
 
 
 int main(int argc, char *argv[]) {
-    UDPServer server;
-    server.startServer(MYPORT);
+    TCPServer tcpServer;
+    tcpServer.startServer(MYPORT);
 
     return 0;
 }

@@ -13,7 +13,7 @@ add_executable(Basic_Http_Server
         src/main.cpp
         src/UDPServer.cpp
         src/NetworkHelper.cpp
-#        include/TCPServer.h
+        src/TCPServer.cpp
 )
 
 target_link_libraries(Basic_Http_Server ${wiringPi_LIB})
