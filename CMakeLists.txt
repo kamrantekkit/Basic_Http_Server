@@ -14,6 +14,8 @@ add_executable(Basic_Http_Server
         src/UDPServer.cpp
         src/NetworkHelper.cpp
         src/TCPServer.cpp
+        src/HttpMessage.cpp
+        include/HttpMessage.h
 )
 
 target_link_libraries(Basic_Http_Server ${wiringPi_LIB})

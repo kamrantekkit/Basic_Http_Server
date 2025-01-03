@@ -13,9 +13,10 @@
 
 #include "TCPServer.h"
 
+#include <iostream>
 
 
-int TCPServer::startServer(const char *port) {
+int TCPServer::startServer(const char *port, const std::string &responseMessage) {
   const int socketServer = socket(AF_INET, SOCK_STREAM, 0);
 
   if (socketServer == -1) {
@@ -23,7 +24,7 @@ int TCPServer::startServer(const char *port) {
     return 1;
   }
 
-  sockaddr_in serverAddress;
+  sockaddr_in serverAddress{};
 
   serverAddress.sin_family = AF_INET;
   serverAddress.sin_port = htons(atoi(port));
@@ -52,10 +53,11 @@ int TCPServer::startServer(const char *port) {
   // Print message
   printf("server: got message: %s\n", buffer);
 
-  // respond to client
-  const char *msg = "Hello from server!";
+  //sending following response
+  std::cout << "server: sending response: " << responseMessage << std::endl;
 
-  send(clientSocket, msg, strlen(msg), 0);
+  // use class variable for response
+  send(clientSocket, responseMessage.c_str(), responseMessage.size(), 0);
 
   close(clientSocket);
   close(socketServer);
